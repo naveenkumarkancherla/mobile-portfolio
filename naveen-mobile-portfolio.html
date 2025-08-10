@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naveen Kumar - Portfolio</title>
+    
+    <!-- Ionic CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionic/7.6.1/ionic.bundle.css">
+    
+    <!-- Ionic Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/collection/components/icon/icon.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .portfolio-app {
+            max-width: 414px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 60px 20px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        .resume-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+
+        .resume-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .resume-btn ion-icon {
+            font-size: 16px;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            border: 4px solid rgba(255,255,255,0.3);
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 15px 10px;
+            text-align: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 12px;
+            font-weight: 500;
+            color: #666;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-tab.active {
+            color: #4facfe;
+            border-bottom-color: #4facfe;
+            background: rgba(79, 172, 254, 0.05);
+        }
+
+        .nav-tab ion-icon {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        /* Content */
+        .content {
+            min-height: calc(100vh - 280px);
+            background: #f8f9fa;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h3 ion-icon {
+            color: #4facfe;
+            font-size: 20px;
+        }
+
+        /* Skills */
+        .skill-category {
+            margin-bottom: 25px;
+        }
+
+        .skill-category h4 {
+            color: #4facfe;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #4facfe, #00f2fe);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -23px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: #4facfe;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 10px rgba(79, 172, 254, 0.3);
+        }
+
+        .timeline-date {
+            color: #4facfe;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .timeline-company {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .timeline-description ul {
+            margin: 10px 0 0 20px;
+        }
+
+        .timeline-description li {
+            margin-bottom: 5px;
+        }
+
+        /* Projects */
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-header {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 15px 20px;
+        }
+
+        .project-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .project-tech {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .project-body {
+            padding: 20px;
+        }
+
+        .project-description {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            padding: 8px 15px;
+            background: #f0f9ff;
+            color: #4facfe;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-link:hover {
+            background: #4facfe;
+            color: white;
+        }
+
+        /* Contact */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .contact-info h4 {
+            margin: 0 0 5px 0;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .contact-info p {
+            margin: 0;
+            color: #666;
+            font-size: 13px;
+        }
+
+        /* Education */
+        .education-item {
+            border-left: 4px solid #4facfe;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        .education-degree {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .education-school {
+            color: #4facfe;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .education-year {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .education-cgpa {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        /* Achievements */
+        .achievement-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .achievement-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .achievement-year {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .achievement-description {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .portfolio-app {
+                max-width: 100%;
+            }
+            
+            .nav-tab {
+                font-size: 11px;
+                padding: 12px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="portfolio-app">
+        <!-- Header -->
+        <div class="header">
+            <div class="profile-img" id="profileInitials">
+                <img src="" alt="Profile" id="profileImage" style="display: none;">
+            </div>
+            <h1 id="profileName"></h1>
+            <div class="subtitle" id="profileTitle"></div>
+            <a href="https://drive.google.com/file/d/1MaceGADCzxaaluI55meUPqT7ZtGX6UCp/view?usp=sharing" class="resume-btn" id="resumeBtn">
+                <ion-icon name="download-outline"></ion-icon>
+                Open Resume
+            </a>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('about')">
+                <ion-icon name="person-outline"></ion-icon>
+                About
+            </button>
+            <button class="nav-tab" onclick="showTab('skills')">
+                <ion-icon name="code-outline"></ion-icon>
+                Skills
+            </button>
+            <button class="nav-tab" onclick="showTab('experience')">
+                <ion-icon name="briefcase-outline"></ion-icon>
+                Work
+            </button>
+            <button class="nav-tab" onclick="showTab('projects')">
+                <ion-icon name="rocket-outline"></ion-icon>
+                Projects
+            </button>
+            <button class="nav-tab" onclick="showTab('contact')">
+                <ion-icon name="mail-outline"></ion-icon>
+                Contact
+            </button>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- About Tab -->
+            <div class="tab-content active" id="about">
+                <div class="card">
+                    <h3><ion-icon name="school-outline"></ion-icon>Education</h3>
+                    <div id="educationContainer"></div>
+                </div>
+
+                <div class="card">
+                    <h3><ion-icon name="trophy-outline"></ion-icon>Achievements</h3>
+                    <div id="achievementsContainer"></div>
+                </div>
+            </div>
+
+            <!-- Skills Tab -->
+            <div class="tab-content" id="skills">
+                <div class="card">
+                    <h3><ion-icon name="code-working-outline"></ion-icon>Technical Skills</h3>
+                    <div id="skillsContainer"></div>
+                </div>
+
+                <div class="card">
+                    <h3><ion-icon name="ribbon-outline"></ion-icon>Certifications</h3>
+                    <div class="timeline" id="certificationsContainer"></div>
+                </div>
+            </div>
+
+            <!-- Experience Tab -->
+            <div class="tab-content" id="experience">
+                <div class="card">
+                    <h3><ion-icon name="briefcase-outline"></ion-icon>Professional Experience</h3>
+                    <div class="timeline" id="experienceContainer"></div>
+                </div>
+            </div>
+
+            <!-- Projects Tab -->
+            <div class="tab-content" id="projects">
+                <div id="projectsContainer"></div>
+            </div>
+
+            <!-- Contact Tab -->
+            <div class="tab-content" id="contact">
+                <div class="card">
+                    <h3><ion-icon name="mail-outline"></ion-icon>Get In Touch</h3>
+                    <div id="contactContainer"></div>
+                </div>
+
+                <div class="card">
+                    <h3><ion-icon name="chatbubble-outline"></ion-icon>Languages</h3>
+                    <div class="skill-tags" id="languagesContainer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ionic JavaScript -->
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionic/7.6.1/ionic.esm.js"></script>
+    <script nomodule src="https://cdnjs.cloudflare.com/ajax/libs/ionic/7.6.1/ionic.js"></script>
+
+    <script>
+        // ===== DATA SECTION - EDIT THIS TO UPDATE YOUR PORTFOLIO =====
+        
+        // Personal Information
+        const personalInfo = {
+            name: "Kancherla Naveen Kumar",
+            initials: "KNK",
+            profileImage: "https://naveen-portfolio-nine.vercel.app/assets/hero/hero.avif",
+            title: "Software Engineer | Angular | Ionic | Django",
+            phone: "+91 9704364602",
+            email: "kancherlanaveenkumar574@gmail.com",
+            languages: ["English", "Hindi", "Telugu"]
+        };
+
+        // Education Data
+        const education = [
+            {
+                degree: "B.Tech, Computer Science Engineering",
+                institution: "Rajiv Gandhi University of Knowledge Technologies, RK Valley",
+                year: "2021-2025",
+                cgpa: "8.73"
+            },
+            {
+                degree: "Intermediate | PUC, MPC",
+                institution: "Rajiv Gandhi University of Knowledge Technologies, RK Valley",
+                year: "2019-2021",
+                cgpa: "9.42"
+            },
+            {
+                degree: "SSC, 10th Grade",
+                institution: "Hope Municipal High School",
+                year: "2019",
+                cgpa: "9.8"
+            }
+        ];
+
+        // Skills Data
+        const skills = {
+            "Programming Languages": [
+                { name: "Java", level: "Advanced" },
+                { name: "Python", level: "Intermediate" },
+                { name: "C", level: "Intermediate" },
+                { name: "JavaScript", level: "Advanced" },
+                { name: "TypeScript", level: "Advanced" }
+            ],
+            "Frameworks & Libraries": [
+                { name: "Angular", level: "Advanced" },
+                { name: "React", level: "Intermediate" },
+                { name: "Django", level: "Intermediate" },
+                { name: "Ionic", level: "Advanced" },
+                { name: "Bootstrap", level: "Advanced" },
+                { name: "PrimeNG", level: "Advanced" }
+            ],
+            "Technologies": [
+                { name: "REST APIs", level: "Advanced" },
+                { name: 'Fast APIs', level: "Intermediate"},
+                { name: "HTML", level: "Advanced" },
+                { name: "CSS", level: "Advanced" },
+                { name: "SQL", level: "Intermediate" },
+                { name: "MongoDB", level: "Intermediate" },
+            ],
+            "Tools & Platforms": [
+                { name: "Git", level: "Advanced" },
+                { name: "Linux", level: "Intermediate" },
+                { name: "Windows", level: "Advanced" },
+                { name: "DevRev SDK", level: "Intermediate" }
+            ]
+        };
+
+        // Work Experience Data
+        const workExperience = [
+            {
+                title: "Software Engineer",
+                company: "Shipsy, Bangalore",
+                period: "May 2024 - Present",
+                description: "Leading development and enhancement of the WMS platform, focusing on both the Angular UI for web/mobile and the Django backend for core logistics services.",
+                achievements: [
+                    "Spearheaded the development of a comprehensive inbound system's front-end using Angular/Ionic, including features for Advanced Shipment Notices (ASN) and customizable batch attributes.",
+                    "Architected and implemented a scalable RESTful API using Django, optimizing stock management and ensuring seamless data flow to the Angular/Ionic UI.",
+                    "Designed and built a real-time inventory adjustment and cycle count module in the Angular-based mobile application, improving stock accuracy and operational efficiency.",
+                    "Contributed significantly to system migrations, including leading the effort to modernize key UI components within the Angular framework.",
+                    "Enhanced platform security and performance through backend optimizations in Django and by implementing robust error handling and user validation in the Angular UI."
+                ]
+            },
+            {
+                title: "Frontend Development Intern",
+                company: "raise.digital",
+                period: "2023",
+                description: "Completed internship focusing on digital technologies and UI development.",
+                achievements: [
+                    "Gained certification and practical experience in modern web technologies",
+                    "Completed multiple UI projects with modern design principles"
+                ]
+            },
+            {
+                title: "MERN Stack Project Collaboration",
+                company: "SURE Trust",
+                period: "2023",
+                description: "Collaborated on full-stack web development project.",
+                achievements: [
+                    "Gained hands-on experience in MongoDB, Express.js, React.js, and Node.js",
+                    "Learned project management and full-stack development practices"
+                ]
+            }
+        ];
+
+        // Certifications Data
+        const certifications = [
+            {
+                name: "Java Programming Certification",
+                period: "2022 - 2023",
+                issuer: ""
+            },
+            {
+                name: "MERN Stack Certification",
+                period: "2023",
+                issuer: "SURE Trust"
+            },
+            {
+                name: "Frontend Internship Certification",
+                period: "2023",
+                issuer: "raise.digital"
+            },
+            {
+                name: "National Level Science Fair Merit Certificate",
+                period: "",
+                issuer: "Central Government"
+            }
+        ];
+
+        // Projects Data
+        const projects = [
+          {
+                title: "Angular Chat Application",
+                technologies: ["Angular", "TypeScript", "CSS", 'Free APIs'],
+                description: "User-friendly chatbot application with seamless communication features, responsive design for both mobile and laptop views.",
+                links: {
+                    sourceCode: "https://github.com/naveenkumarkancherla/chatAPP",
+                    demo: "https://naveens-chat-app.vercel.app/"
+                }
+            },
+            {
+                title: "Angular Weather Application",
+                technologies: ["Angular", "REST API", "TypeScript"],
+                description: "Weather app allowing users to search any location for real-time weather data with intuitive interface and accurate forecasts.",
+                links: {
+                    sourceCode: "https://github.com/naveenkumarkancherla/WeatherAppAngular",
+                    demo: "https://weather-app-angular-ten.vercel.app/"
+                }
+            },
+            {
+                title: "E-Commerce Application - HavenShopping",
+                technologies: ["React.js", "Express.js", "MongoDB", "Node.js"],
+                description: "A comprehensive eCommerce platform offering seamless shopping experience with a wide range of products and secure transactions.",
+                links: {
+                    sourceCode: "https://github.com/naveenkumarkancherla/SURETRUST_FINAL_PROJECT",
+                }
+            },
+            {
+                title: "WatchHaven - Streaming Platform",
+                technologies: ["React.js", "Node.js", "MongoDB"],
+                description: "A dynamic streaming website with extensive library of movies and TV shows, ensuring seamless and enjoyable viewing experience.",
+                links: {
+                    sourceCode: "https://github.com/naveenkumarkancherla/WebTechnologies_ProjectS/tree/main/WatchHaven_streaming%20website_php",
+                    demo: "https://naveenswatchhavenwebpage.netlify.app/"
+                }
+            },
+            {
+                title: "College Management System",
+                technologies: ["Angular", "TypeScript", "Bootstrap"],
+                description: "Comprehensive system with three unique login features highlighting diverse functionalities within college management, enhancing user experience and accessibility.",
+                links: {
+                    sourceCode: "https://github.com/naveenkumarkancherla/WebTechnologies_ProjectS/tree/main/MERN-College-Management"
+                }
+            },
+            {
+                title: "Additional Projects",
+                technologies: ["Various Technologies"],
+                description: "Netflix Clone, Quiz Application, GPA Calculator for academic results, and Personal Portfolio website.",
+                links: {
+                  sourceCode: "https://github.com/naveenkumarkancherla?tab=repositories"
+                }
+            }
+        ];
+
+        // Achievements Data
+        const achievements = [
+            {
+                title: "National Award",
+                year: "2015",
+                description: "Participated and received awards at district, state, and national levels. Selected for Japan Sakura Science Program."
+            },
+            {
+                title: "Prathibha Puraskar",
+                year: "2016",
+                description: "Received award from the Chief Minister of Andhra Pradesh for notable achievement."
+            },
+            {
+                title: "Ashoka Youth Venturer Fellowship",
+                year: "",
+                description: "Selected for the fellowship program, demonstrating leadership qualities and social impact."
+            },
+            {
+                title: "Child Rights Role Model Award",
+                year: "",
+                description: "Received from the CRY organization for advocacy and efforts towards child rights."
+            }
+        ];
+
+        // Contact Links
+        const contactLinks = {
+            linkedin: "https://www.linkedin.com/in/naveenkumar-kancherla-71585a1b5",
+            github: "https://github.com/naveenkumarkancherla",
+            portfolio: "https://kancherlanaveenkum.wixsite.com/naveen2003",
+            leetcode: "https://leetcode.com/u/kancherla191099/",
+            geeksforgeeks: "#"
+        };
+
+        // ===== END OF DATA SECTION =====
+
+        // Navigation Function
+        window.showTab = function(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(nav => nav.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        };
+
+        // Render Functions
+        function renderPersonalInfo() {
+            const profileImgContainer = document.getElementById('profileInitials');
+            const profileImg = document.getElementById('profileImage');
+            
+            if (personalInfo.profileImage) {
+                profileImg.src = personalInfo.profileImage;
+                profileImg.style.display = 'block';
+                profileImgContainer.style.background = 'none';
+                profileImgContainer.style.fontSize = '0';
+                
+                profileImg.onload = function() {
+                    console.log('Profile image loaded successfully');
+                };
+                
+                profileImg.onerror = function() {
+                    console.log('Profile image failed to load, showing initials');
+                    profileImg.style.display = 'none';
+                    profileImgContainer.style.background = 'linear-gradient(45deg, #ff6b6b, #4ecdc4)';
+                    profileImgContainer.style.fontSize = '48px';
+                    profileImgContainer.textContent = personalInfo.initials;
+                };
+            } else {
+                profileImg.style.display = 'none';
+                profileImgContainer.textContent = personalInfo.initials;
+            }
+            
+            document.getElementById('profileName').textContent = personalInfo.name;
+            document.getElementById('profileTitle').textContent = personalInfo.title;
+        }
+
+        function renderEducation() {
+            const container = document.getElementById('educationContainer');
+            container.innerHTML = education.map(edu => `
+                <div class="education-item">
+                    <div class="education-degree">${edu.degree}</div>
+                    <div class="education-school">${edu.institution}</div>
+                    <div class="education-year">${edu.year}</div>
+                    <div class="education-cgpa">CGPA: ${edu.cgpa}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderSkills() {
+            const container = document.getElementById('skillsContainer');
+            container.innerHTML = Object.entries(skills).map(([category, skillList]) => `
+                <div class="skill-category">
+                    <h4>${category}</h4>
+                    <div class="skill-tags">
+                        ${skillList.map(skill => `
+                            <span class="skill-tag">
+                                ${skill.name}${skill.level !== 'Advanced' ? ` (${skill.level})` : ''}
+                            </span>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderExperience() {
+            const container = document.getElementById('experienceContainer');
+            container.innerHTML = workExperience.map(job => `
+                <div class="timeline-item">
+                    <div class="timeline-date">${job.period}</div>
+                    <div class="timeline-title">${job.title}</div>
+                    <div class="timeline-company">${job.company}</div>
+                    <div class="timeline-description">
+                        <p>${job.description}</p>
+                        <ul>
+                            ${job.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderCertifications() {
+            const container = document.getElementById('certificationsContainer');
+            container.innerHTML = certifications.map(cert => `
+                <div class="timeline-item">
+                    ${cert.period ? `<div class="timeline-date">${cert.period}</div>` : ''}
+                    <div class="timeline-title">${cert.name}</div>
+                    ${cert.issuer ? `<div class="timeline-company">${cert.issuer}</div>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function renderProjects() {
+            const container = document.getElementById('projectsContainer');
+            container.innerHTML = projects.map(project => `
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">${project.title}</div>
+                        <div class="project-tech">${project.technologies.join(' • ')}</div>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-description">${project.description}</div>
+                        <div class="project-links">
+                            ${Object.entries(project.links).map(([type, url]) => `
+                                <span class="project-link" onclick="handleProjectLink('${url}', '${type}')">
+                                    ${type.charAt(0).toUpperCase() + type.slice(1).replace(/([A-Z])/g, ' $1')}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderContact() {
+            const contactItems = [
+                {
+                    icon: "📞",
+                    title: "Phone",
+                    value: personalInfo.phone,
+                    action: () => window.location.href = `tel:${personalInfo.phone}`
+                },
+                {
+                    icon: "✉️",
+                    title: "Email",
+                    value: personalInfo.email,
+                    action: () => window.location.href = `mailto:${personalInfo.email}`
+                },
+                {
+                    icon: "💼",
+                    title: "LinkedIn",
+                    value: "Connect with me on LinkedIn",
+                    action: () => handleContactLink(contactLinks.linkedin, 'LinkedIn')
+                },
+                {
+                    icon: "🔗",
+                    title: "GitHub",
+                    value: "Check out my repositories",
+                    action: () => handleContactLink(contactLinks.github, 'GitHub')
+                },
+                {
+                    icon: "🌐",
+                    title: "Portfolio",
+                    value: "View my complete portfolio",
+                    action: () => handleContactLink(contactLinks.portfolio, 'Portfolio')
+                },
+                {
+                    icon: "💻",
+                    title: "Coding Profiles",
+                    value: "LeetCode & GeeksForGeeks",
+                    action: () => {
+                        if (contactLinks.leetcode !== '#') {
+                            window.open(contactLinks.leetcode, '_blank');
+                        } else {
+                            alert('GeeksForGeeks profile link needed');
+                        }
+                    }
+                }
+            ];
+
+            const container = document.getElementById('contactContainer');
+            container.innerHTML = contactItems.map(item => `
+                <div class="contact-item" onclick="contactActions['${item.title}']()">
+                    <div class="contact-icon">${item.icon}</div>
+                    <div class="contact-info">
+                        <h4>${item.title}</h4>
+                        <p>${item.value}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Store contact actions globally
+            window.contactActions = {};
+            contactItems.forEach(item => {
+                window.contactActions[item.title] = item.action;
+            });
+        }
+
+        function renderAchievements() {
+            const container = document.getElementById('achievementsContainer');
+            container.innerHTML = achievements.map(achievement => `
+                <div class="achievement-item">
+                    <div class="achievement-title">${achievement.title}</div>
+                    ${achievement.year ? `<div class="achievement-year">${achievement.year}</div>` : ''}
+                    <div class="achievement-description">${achievement.description}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderLanguages() {
+            const container = document.getElementById('languagesContainer');
+            container.innerHTML = personalInfo.languages.map(language => `
+                <span class="skill-tag">${language}</span>
+            `).join('');
+        }
+
+        // Helper Functions
+        function handleProjectLink(url, type) {
+            if (url === '#') {
+                alert(`${type} link will be added when provided`);
+            } else {
+                window.open(url, '_blank');
+            }
+        }
+
+        function handleContactLink(url, type) {
+            if (url === '#') {
+                alert(`${type} profile link needed`);
+            } else {
+                window.open(url, '_blank');
+            }
+        }
+
+        // Initialize Portfolio
+        function initPortfolio() {
+            renderPersonalInfo();
+            renderEducation();
+            renderSkills();
+            renderExperience();
+            renderCertifications();
+            renderProjects();
+            renderContact();
+            renderAchievements();
+            renderLanguages();
+        }
+
+        // Page Load Event
+        document.addEventListener('DOMContentLoaded', function() {
+            initPortfolio();
+        });
+    </script>
