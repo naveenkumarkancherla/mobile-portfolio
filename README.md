@@ -5,6 +5,13 @@ Welcome to my personal portfolio website! This portfolio showcases my skills, wo
 🔗 **Deployed Website:** [Portfolio Live](https://naveenkancherla-portfolio.netlify.app/)
 
 ---
+## 🎥 Demo
+
+
+https://github.com/user-attachments/assets/b5c023dc-8c9a-4ee6-8f92-fb6721ce8da7
+
+
+---
 
 ## Features
 
